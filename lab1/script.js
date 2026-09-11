@@ -14,12 +14,14 @@ console.log(`
 `);
 
 function triangle(val1, type1, val2, type2) {
-  if (typeof val1 !== "number" || typeof val2 !== "number" || val1 <= 0 || val2 <= 0) {
+ const EPS = 0.000001;
+  if (typeof val1 !== "number" || typeof val2 !== "number" || val1 <= EPS || val2 <= EPS) {
     return "Zero or negative input";
   }
 
   const toRadians = (degrees) => degrees * (Math.PI / 180);
   const toDegrees = (radians) => radians * (180 / Math.PI);
+  const round = (num) => Number(num.toFixed(5));
 
   let a, b, c, alpha, beta;
 
@@ -30,7 +32,7 @@ function triangle(val1, type1, val2, type2) {
     const legVal = type1 === "leg" ? val1 : val2;
     const hypVal = type1 === "hypotenuse" ? val1 : val2;
 
-    if (legVal >= hypVal) {
+    if (legVal >= hypVal - EPS) {
       return "Катет повинен бути меншим за гіпотенузу";
     }
 
@@ -56,7 +58,7 @@ function triangle(val1, type1, val2, type2) {
     const legVal = type1 === "leg" ? val1 : val2;
     const angleVal = type1 === "adjacent angle" ? val1 : val2;
 
-    if (angleVal <= 0 || angleVal >= 90) {
+   if (angleVal >= 90 - EPS || angleVal <= EPS) {
       return "Кут повинен бути в межах від 0 до 90 градусів";
     }
 
@@ -74,7 +76,7 @@ function triangle(val1, type1, val2, type2) {
     const legVal = type1 === "leg" ? val1 : val2;
     const angleVal = type1 === "opposite angle" ? val1 : val2;
 
-    if (angleVal <= 0 || angleVal >= 90) {
+   if (angleVal >= 90 - EPS || angleVal <= EPS) {
       return "Кут повинен бути в межах від 0 до 90 градусів";
     }
 
@@ -91,7 +93,7 @@ function triangle(val1, type1, val2, type2) {
     const hypVal = type1 === "hypotenuse" ? val1 : val2;
     const angleVal = type1 === "angle" ? val1 : val2;
 
-    if (angleVal <= 0 || angleVal >= 90) {
+    if (angleVal >= 90 - EPS || angleVal <= EPS) {
       return "Кут повинен бути в межах від 0 до 90 градусів";
     }
 
